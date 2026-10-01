@@ -771,3 +771,23 @@ const restaurants = [
 ];
 
 // your code here
+const list = document.querySelector('#restaurantList');
+navigator.geolocation.getCurrentPosition((position) => {
+  const userLat = position.coords.latitude;
+  const userLon = position.coords.longitude;
+  restaurants.forEach((restaurant) => {
+    const [lon, lat] = restaurant.location.coordinates;
+    restaurant.distance = Math.sqrt(
+      (lat - userLat) ** 2 + (lon - userLon) ** 2
+    );
+  });
+  restaurants.sort((a, b) => a.distance - b.distance);
+  restaurants.forEach((restaurant) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+            <strong>${restaurant.name}</strong><br>
+            ${restaurant.address}, ${restaurant.city}
+        `;
+    list.appendChild(li);
+  });
+});

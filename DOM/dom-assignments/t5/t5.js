@@ -771,3 +771,7 @@ const restaurants = [
 ];
 
 // your code here
+const map = L.map('map').setView([60.1695, 24.9355], 10);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors',
+}).addTo(map);
